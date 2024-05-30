@@ -1,7 +1,7 @@
-import * as React from 'react';
 import { UIView, UIViewProps } from '@uirouter/react';
-import { UIRouterContextComponent } from './UIRouterReactContext';
+import * as React from 'react';
 import { debugLog } from '../debug';
+import { UIRouterContextComponent } from './UIRouterReactContext';
 
 const InternalUIView = UIView.__internalViewComponent;
 
@@ -13,7 +13,9 @@ export const ReactUIView = ({ refFn, ...props }: IReactUIViewProps) => {
   debugLog('react', 'ReactUIView', `?/${props['name']}`, '.render()', '');
   return (
     <UIRouterContextComponent parentContextLevel="3" inherited={false}>
-      <InternalUIView {...props} ref={refFn as any} />
+      {/* @chiptus: original code sent a ref, not sure why, but I added an ignore */}
+      {/* @ts-ignore */}
+      <InternalUIView {...props} ref={refFn} />
     </UIRouterContextComponent>
   );
 };
